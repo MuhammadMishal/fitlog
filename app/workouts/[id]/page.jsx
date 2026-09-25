@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import AddToTodaysPlan from "@/components/workoutDetails/addToPlan";
+import SaveForLater from "@/components/workoutDetails/saveForLaterButton";
 
 const getWorkoutData = async () => {
   const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
@@ -11,6 +13,7 @@ export default async function WorkoutDetailsPage({ params }) {
   const { id } = await params;
   const workoutDetailsData = await getWorkoutData();
   const workoutDetail = workoutDetailsData.find((detail) => detail.id == id);
+  console.log("====", workoutDetail);
 
   return (
     <div className="container mx-auto flex justify-between py-10">
@@ -90,13 +93,12 @@ export default async function WorkoutDetailsPage({ params }) {
           </div>
 
           {/* buttons */}
-          <div className=" ">
-            <button className="btn btn-active btn-success bg-[#CCFF00] rounded-xl mr-3">
-              Add to todays plan
-            </button>
-            <button className="btn btn-soft bg-black text-white rounded-xl">
-              Save for later
-            </button>
+          <div className="">
+            <AddToTodaysPlan workOutDetail={workoutDetail} />
+            <SaveForLater
+              className="btn btn-soft"
+              workoutDetail={workoutDetail}
+            ></SaveForLater>
           </div>
         </div>
       </div>

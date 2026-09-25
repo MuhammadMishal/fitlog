@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import WorkoutProvider from "@/context/WorkoutContext";
 
 export const metadata = {
   title: "Fitlog",
@@ -11,11 +12,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        <Navbar></Navbar>
+        <WorkoutProvider>
+          <Navbar></Navbar>
 
-        <main className="flex-1 bg-black">{children}</main>
+          <main className="flex-1 bg-black">{children}</main>
 
-        <Footer></Footer>
+          <Footer></Footer>
+        </WorkoutProvider>
       </body>
     </html>
   );
