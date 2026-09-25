@@ -3,16 +3,15 @@ import Image from "next/image";
 import AddToTodaysPlan from "@/components/workoutDetails/addToPlan";
 import SaveForLater from "@/components/workoutDetails/saveForLaterButton";
 
-const getWorkoutData = async () => {
-  const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
+const getWorkoutDetails = async (id) => {
+  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
   const data = await res.json();
   return data;
 };
 
 export default async function WorkoutDetailsPage({ params }) {
   const { id } = await params;
-  const workoutDetailsData = await getWorkoutData();
-  const workoutDetail = workoutDetailsData.find((detail) => detail.id == id);
+  const workoutDetail = await getWorkoutDetails(id);
   console.log("====", workoutDetail);
 
   return (

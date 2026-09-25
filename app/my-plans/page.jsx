@@ -1,11 +1,13 @@
 "use client";
 import { WorkoutContext } from "@/context/WorkoutContext";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 export default function AddedPlan() {
-  const { plan, saved, setPlan, setSaved } = useContext(WorkoutContext);
+  const { plan, saved, setPlan, setSaved, done, setDone } =
+    useContext(WorkoutContext);
   console.log(plan);
 
   const [activeTab, setActiveTab] = useState("plan");
@@ -13,15 +15,20 @@ export default function AddedPlan() {
   const [sortBy, setSortBy] = useState("duration");
 
   function removeWorkout(id) {
+    const workout = plan.find((workout) => workout.id === id);
     if (activeTab === "plan") {
       const remainingWorkout = plan.filter((workout) => workout.id !== id);
       setPlan(remainingWorkout);
+      toast.success(`${workout.name} removed from today's plan`);
     } else {
       const remainingWorkout = saved.filter((workout) => workout.id !== id);
       setSaved(remainingWorkout);
     }
   }
-
+  function markAsDone(workout) {
+    setDone([...done, workout]);
+    toast.success(`${workout.name} marked as donee`);
+  }
   const workouts = activeTab === "plan" ? plan : saved;
 
   const totalDuration = workouts.reduce(
@@ -150,8 +157,19 @@ export default function AddedPlan() {
                   View Details
                 </button>
               </Link>
-              {activeTab === "plan" && (
-                <button className="bg-lime-400 text-black rounded-md px-4 py-2">
+              {activeTab === "plan" &&
+              done.some((item) => item.id === workout.id) ? (
+                <button
+                  className="bg-gray-600 text-white rounded-md px-4 py-2"
+                  disabled
+                >
+                  Done
+                </button>
+              ) : (
+                <button
+                  onClick={() => markAsDone(workout)}
+                  className="bg-[#CCFF00] text-black rounded-md px-4 py-2"
+                >
                   Mark as Done
                 </button>
               )}
