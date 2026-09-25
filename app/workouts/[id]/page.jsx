@@ -94,7 +94,7 @@ export default async function WorkoutDetailsPage({ params }) {
 
           {/* buttons */}
           <div className="">
-            <AddToTodaysPlan workOutDetail={workoutDetail} />
+            <AddToTodaysPlan workoutDetail={workoutDetail} />
             <SaveForLater
               className="btn btn-soft"
               workoutDetail={workoutDetail}
