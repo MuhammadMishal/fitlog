@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <section className="flex justify-between p-5">
       <div className="flex justify-between gap-2">
-        <Image src={footerLogo} alt="footer logo" />
+        <Image src={footerLogo} alt="" />{" "}
         <p className="font-extrabold">FITLOG</p>
       </div>
       <div className="text-gray-600">
