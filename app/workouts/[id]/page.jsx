@@ -49,32 +49,32 @@ export default async function WorkoutDetailsPage({ params }) {
         {/* card */}
         <div className="">
           <div className="bg-[#151922] p-4 rounded-2xl">
-            <div className="flex justify-between border-b-1 border-gray-500 p-3">
+            <div className="flex justify-between border-b border-gray-500 p-3">
               <p className="text-sm text-gray-400">EQUIPMENT</p>
               <p className="text-sm">{workoutDetail.equipment}</p>
             </div>
 
-            <div className="flex justify-between border-b-1 border-gray-500 p-3">
+            <div className="flex justify-between border-b border-gray-500 p-3">
               <p className="text-sm text-gray-400">DIFFICULTY</p>
               <p className="text-sm">{workoutDetail.difficulty}</p>
             </div>
 
-            <div className="flex justify-between border-b-1 border-gray-500  p-3">
+            <div className="flex justify-between border-b border-gray-500  p-3">
               <p className="text-sm text-gray-400">SETS</p>
               <p className="text-sm">{workoutDetail.sets}</p>
             </div>
 
-            <div className="flex justify-between border-b-1 border-gray-500  p-3">
+            <div className="flex justify-between border-b border-gray-500  p-3">
               <p className="text-sm text-gray-400">REPS</p>
               <p className="text-sm">{workoutDetail.reps}</p>
             </div>
 
-            <div className="flex justify-between border-b-1 border-gray-500  p-3">
+            <div className="flex justify-between border-b border-gray-500  p-3">
               <p className="text-sm text-gray-400">DURATION</p>
               <p className="text-sm">{workoutDetail.duration} min</p>
             </div>
 
-            <div className="flex justify-between border-b-1 border-gray-500  p-3">
+            <div className="flex justify-between border-b border-gray-500  p-3">
               <p className="text-sm text-gray-400">CALORIES</p>
               <p className="text-sm">{workoutDetail.caloriesBurned} kcal</p>
             </div>

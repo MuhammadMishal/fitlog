@@ -103,14 +103,14 @@ export default function AddedPlan() {
             <p
               onClick={() => setActiveTab("plan")}
               role="tab"
-              className={`tab ${activeTab === "plan" ? "bg-black text-[#CCFF00] border-1 rounded-xl" : ""}`}
+              className={`tab ${activeTab === "plan" ? "bg-black text-[#CCFF00] border rounded-xl" : ""}`}
             >
               {"Today's Plan"}
             </p>
             <p
               onClick={() => setActiveTab("saved")}
               role="tab"
-              className={`tab ${activeTab === "saved" ? "bg-black text-[#CCFF00] border-1 rounded-xl" : ""}`}
+              className={`tab ${activeTab === "saved" ? "bg-black text-[#CCFF00] border rounded-xl" : ""}`}
             >
               {"Saved"}
             </p>

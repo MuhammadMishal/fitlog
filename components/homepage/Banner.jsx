@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Banner() {
   return (
     <section className="container mx-auto px-4 mt-8">
-      <div className="bg-[#181a20] border border-gray-800 rounded-[32px] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div className="bg-[#181a20] border border-gray-800 rounded-4xl p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Left Content */}
         <div className="max-w-xl">
           <p className="text-[#ccff00] text-xs font-black tracking-widest uppercase mb-4">
@@ -37,7 +37,7 @@ export default function Banner() {
           <Image
             src={bannerImage}
             alt="Gym Workout Illustration"
-            className="w-[320px] sm:w-[450px] lg:w-[550px] h-auto object-contain"
+            className="w-[320px] sm:w-112.5 lg:w-137.5 h-auto object-contain"
             priority
           />
         </div>
