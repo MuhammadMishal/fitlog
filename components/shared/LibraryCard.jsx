@@ -4,44 +4,62 @@ import Link from "next/link";
 
 export default function LibraryCard({ workoutData }) {
   return (
-    <Link href={`/workouts/${workoutData.id}`}>
-      <section className="container mx-auto ">
-        <div className=" border-2 rounded-3xl border-black bg-gray-800 p-5 ">
-          {/* image */}
-          <div>
+    <Link href={`/workouts/${workoutData.id}`} className="block h-full">
+      <div className="bg-[#151922] border border-gray-800 rounded-2xl overflow-hidden flex flex-col justify-between h-full hover:border-[#CCFF00]">
+        <div>
+          <div className="relative w-full h-60 overflow-hidden">
             <Image
               src={workoutData.image}
-              alt=""
-              width={500}
-              height={100}
-              className=""
+              alt={workoutData.name || "Workout Image"}
+              fill
+              className="object-cover"
             />
           </div>
-          {/* muscleGroups */}
-          <div className="flex gap-2 mt-4 mb-4">
-            {workoutData.muscleGroups.map((muscle, ind) => (
-              <span
-                key={ind}
-                className="rounded-full bg-[#C2F800] px-3 py-1 text-sm text-black"
-              >
-                {muscle}
-              </span>
-            ))}
-          </div>
-          {/* name */}
-          <div className="font-bold text-2xl mb-3">{workoutData.name}</div>
-          {/* equipment */}
-          <div className="text-[#9CA3AF] mb-4">{workoutData.equipment}</div>
-          {/* duration */}
-          <div className="border-t-2 border-gray-700 text-[#9CA3AF] flex justify-baseline gap-10 items-center">
-            <div className="gap-y-3">{workoutData.duration} min</div>
-            {/* caloriesBurned */}
-            <div>{workoutData.caloriesBurned} kcal</div>
-            {/* rating */}
-            <div>{workoutData.rating}</div>
+
+          {/* Card Content */}
+          <div className="p-4">
+            {/* Muscle Groups */}
+            <div className="flex flex-wrap gap-2 mb-3">
+              {workoutData.muscleGroups?.map((muscle, ind) => (
+                <span
+                  key={ind}
+                  className="rounded-full bg-[#CCFF00] px-3 py-0.5 text-xs font-semibold text-black"
+                >
+                  {muscle}
+                </span>
+              ))}
+            </div>
+
+            {/* Name */}
+            <h3 className="font-extrabold text-lg text-white uppercase tracking-wide mb-1">
+              {workoutData.name}
+            </h3>
+
+            {/* Equipment */}
+            <p className="text-gray-400 text-xs mb-4">
+              {workoutData.equipment}
+            </p>
+
+            {/* Card Footer Info */}
+            <div className="flex items-center gap-4 text-xs font-medium text-gray-300">
+              {/* Duration */}
+              <div className="flex items-center gap-1">
+                <span>{workoutData.duration} min</span>
+              </div>
+
+              {/* Calories Burned */}
+              <div className="flex items-center gap-1">
+                <span>{workoutData.caloriesBurned} kcal</span>
+              </div>
+
+              {/* Rating */}
+              <div className="flex items-center gap-1">
+                <span>{workoutData.rating}</span>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </Link>
   );
 }

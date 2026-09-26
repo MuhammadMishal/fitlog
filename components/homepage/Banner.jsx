@@ -1,30 +1,45 @@
 import Image from "next/image";
 import React from "react";
 import bannerImage from "@/public/assets/banner.png";
+import Link from "next/link";
 
 export default function Banner() {
   return (
-    <section className="container mx-auto py-20 bg-[#15171D] border-2 rounded-3xl mt-7 border-gray-700">
-      <div className=" flex justify-center gap-50  border-gray-700 items-center mt-7 w-auto ml-5 mr-5">
-        {/* Left */}
-        <div className=" ml-7">
-          <p className="text-[#C2F800] ">WORKOUT LIBRARY</p>
-          <h1 className=" mt-5 mb-5 font-extrabold text-4xl">
-            TRAIN WITH INTENT. LOG <br /> EVERY SET.
-          </h1>
-
-          <p className="mb-5 text-[#9CA3AF]">
-            FitLog is a dark, no-nonsense gym companion: pick a lift, lock it{" "}
-            <br />{" into today's plan, and watch the week's work add up."}
+    <section className="container mx-auto px-4 mt-8">
+      <div className="bg-[#181a20] border border-gray-800 rounded-[32px] p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
+        {/* Left Content */}
+        <div className="max-w-xl">
+          <p className="text-[#ccff00] text-xs font-black tracking-widest uppercase mb-4">
+            WORKOUT LIBRARY
           </p>
 
-          <button className="p-3  bg-[#C2F800] rounded-[6px] text-black font-semibold">
-            BROWSE WORKOUTS
-          </button>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white uppercase tracking-tight leading-[1.1] mb-5">
+            TRAIN WITH INTENT. <br /> LOG EVERY SET.
+          </h1>
+
+          <p className="text-gray-400 text-xs md:text-base leading-relaxed mb-8 max-w-md">
+            {
+              "FitLog is a dark, no-nonsense gym companion: pick a lift, lock it "
+            }
+            {"into today's plan,and watch the week's work add up."}
+          </p>
+
+          <Link
+            href={"/workouts"}
+            className="bg-[#ccff00] hover:bg-[#b8e600] text-black font-bold px-6 py-3.5 rounded-xl transition duration-200 text-sm"
+          >
+            Browse Workouts
+          </Link>
         </div>
-        {/* Right */}
-        <div>
-          <Image src={bannerImage} alt=""></Image>
+
+        {/* Right Image Container */}
+        <div className="flex justify-center items-center">
+          <Image
+            src={bannerImage}
+            alt="Gym Workout Illustration"
+            className="w-[320px] sm:w-[450px] lg:w-[550px] h-auto object-contain"
+            priority
+          />
         </div>
       </div>
     </section>
