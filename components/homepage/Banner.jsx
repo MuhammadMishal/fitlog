@@ -15,7 +15,7 @@ export default function Banner() {
 
           <p className="mb-5 text-[#9CA3AF]">
             FitLog is a dark, no-nonsense gym companion: pick a lift, lock it{" "}
-            <br /> into today's plan, and watch the week's work add up.
+            <br />{" into today's plan, and watch the week's work add up."}
           </p>
 
           <button className="p-3  bg-[#C2F800] rounded-[6px] text-black font-semibold">

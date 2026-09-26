@@ -8,7 +8,7 @@ export default function AddToTodaysPlan({ workoutDetail }) {
 
   const isAlreadyAdded = plan.some((item) => item.id === workoutDetail.id);
   const isPlanFull = plan.length >= 5;
-  const isDisabled = isAlreadyAdded || isPlanFull;
+  const isDisabled = isPlanFull;
 
   // Dynamic label based on state
   const getButtonText = () => {
@@ -18,8 +18,9 @@ export default function AddToTodaysPlan({ workoutDetail }) {
   };
 
   const handleAddToTodaysPlan = () => {
+    if (isAlreadyAdded)
+      return toast.warning(`${workoutDetail.name} Added to Today's Plan`);
     if (isDisabled) return;
-
     setPlan([...plan, workoutDetail]);
     toast.success(`${workoutDetail.name} added to today's plan!`);
   };
@@ -27,7 +28,6 @@ export default function AddToTodaysPlan({ workoutDetail }) {
   return (
     <button
       className="btn text-black bg-[#CCFF00] hover:bg-[#b8e600] disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed rounded-xl mr-3"
-      disabled={isDisabled}
       onClick={handleAddToTodaysPlan}
     >
       {getButtonText()}

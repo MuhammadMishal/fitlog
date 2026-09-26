@@ -30,7 +30,7 @@ export default function AddedPlan() {
 
       <div>
         <div>
-          <div>Today's Plan</div>
+          <div>{"Today's Plan"}</div>
           <div>Saved</div>
         </div>
         <div>

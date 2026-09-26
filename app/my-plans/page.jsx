@@ -4,6 +4,7 @@ import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import PlanActionButtons from "@/components/shared/PlanActionButtons";
 
 export default function AddedPlan() {
   const { plan, saved, setPlan, setSaved, done, setDone } =
@@ -157,22 +158,11 @@ export default function AddedPlan() {
                   View Details
                 </button>
               </Link>
-              {activeTab === "plan" &&
-              done.some((item) => item.id === workout.id) ? (
-                <button
-                  className="bg-gray-600 text-white rounded-md px-4 py-2"
-                  disabled
-                >
-                  Done
-                </button>
-              ) : (
-                <button
-                  onClick={() => markAsDone(workout)}
-                  className="bg-[#CCFF00] text-black rounded-md px-4 py-2"
-                >
-                  Mark as Done
-                </button>
-              )}
+              <PlanActionButtons
+                activeTab={activeTab}
+                workoutData={workout}
+                markAsDone={markAsDone}
+              />
               <button
                 onClick={() => removeWorkout(workout.id)}
                 className="text-xl px-2"

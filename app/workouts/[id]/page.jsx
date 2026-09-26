@@ -83,8 +83,8 @@ export default async function WorkoutDetailsPage({ params }) {
           <h2 className="font-bold p-4">Instructions</h2>
           <div className="p-3 ml-2">
             <ol className="list-decimal">
-              {workoutDetail.instructions.map((instruction) => (
-                <li key={id} className="p-2">
+              {workoutDetail.instructions.map((instruction, ind) => (
+                <li key={ind} className="p-2">
                   {instruction}
                 </li>
               ))}
