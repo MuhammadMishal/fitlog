@@ -1,17 +1,25 @@
 "use client";
 import { WorkoutContext } from "@/context/WorkoutContext";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import PlanActionButtons from "@/components/shared/PlanActionButtons";
+import { useSearchParams } from "next/navigation";
 
 export default function AddedPlan() {
+  const params = useSearchParams();
+  const tab = params.get("tab");
   const { plan, saved, setPlan, setSaved, done, setDone } =
     useContext(WorkoutContext);
   console.log(plan);
 
   const [activeTab, setActiveTab] = useState("plan");
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (tab) setActiveTab(tab);
+  }, [tab]);
 
   const [sortBy, setSortBy] = useState("duration");
 
@@ -72,7 +80,7 @@ export default function AddedPlan() {
         <div className="grid grid-cols-3 text-center">
           <div>
             <p className="text-gray-400">Exercises</p>
-            <h2 className="mt-2 text-2xl font-bold">{plan.length}</h2>
+            <h2 className="mt-2 text-2xl font-bold">{workouts.length}</h2>
           </div>
 
           <div className="border-x border-gray-700">
