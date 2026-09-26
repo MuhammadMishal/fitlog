@@ -1,6 +1,7 @@
 "use client";
 import { WorkoutContext } from "@/context/WorkoutContext";
 import React, { useContext } from "react";
+import { TiFolderAdd } from "react-icons/ti";
 import { toast } from "react-toastify";
 
 export default function AddToTodaysPlan({ workoutDetail }) {
@@ -30,6 +31,7 @@ export default function AddToTodaysPlan({ workoutDetail }) {
       className="btn text-black bg-[#CCFF00] hover:bg-[#b8e600] disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed rounded-xl mr-3"
       onClick={handleAddToTodaysPlan}
     >
+      <TiFolderAdd className="text-black" />
       {getButtonText()}
     </button>
   );

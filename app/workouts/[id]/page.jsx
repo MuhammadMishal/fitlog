@@ -15,15 +15,21 @@ export default async function WorkoutDetailsPage({ params }) {
   console.log("====", workoutDetail);
 
   return (
-    <div className="container mx-auto flex justify-between py-10">
+    <div className="container mx-auto flex lg:flex-row flex-col gap-4 justify-between py-10 px-4">
       {/* left */}
 
-      <div className="p-4">
-        <Image src={workoutDetail.image} alt="" width={700} height={400} />
+      <div className="relative aspect-square sm:aspect-video lg:aspect-auto min-h-62.5 w-full flex-1 overflow-hidden rounded-2xl">
+        <Image
+          src={workoutDetail.image}
+          alt={workoutDetail.name || "Workout detail"}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority
+        />
       </div>
-
       {/* Right */}
-      <div>
+      <div className="flex-1">
         <h2>{workoutDetail.name}</h2>
 
         <p>{workoutDetail.description}</p>

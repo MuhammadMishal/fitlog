@@ -6,6 +6,8 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import PlanActionButtons from "@/components/shared/PlanActionButtons";
 import { useSearchParams } from "next/navigation";
+import { IoTimeOutline } from "react-icons/io5";
+import { FaFire, FaRegStar } from "react-icons/fa";
 
 export default function AddedPlan() {
   const params = useSearchParams();
@@ -151,18 +153,27 @@ export default function AddedPlan() {
                 <p className="text-gray-400">{workout.equipment}</p>
 
                 <div className="flex gap-4 mt-3 text-sm text-gray-400">
-                  <p>{workout.duration} min</p>
+                  <p className="flex items-center gap-1">
+                    <IoTimeOutline className="text-[#CCFF00]" />
+                    {workout.duration} min
+                  </p>
 
-                  <p>{workout.caloriesBurned} kcal</p>
+                  <p className="flex items-center gap-1">
+                    <FaFire className="text-[#CCFF00]" />
+                    {workout.caloriesBurned} kcal
+                  </p>
 
-                  <p>{workout.rating}</p>
+                  <p className="flex items-center gap-1">
+                    <FaRegStar className="text-[#CCFF00]" />
+                    {workout.rating}
+                  </p>
                 </div>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
               <Link href={`/workouts/${workout.id}`}>
-                <button className="border border-gray-600 rounded-md px-4 py-2">
+                <button className="border border-gray-600 rounded-full px-4 py-2">
                   View Details
                 </button>
               </Link>

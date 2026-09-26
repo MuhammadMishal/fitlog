@@ -12,7 +12,7 @@ export default function Navbar() {
   const { plan, saved } = useContext(WorkoutContext);
 
   return (
-    <section className="sticky top-0 z-50 border-b border-gray-800 bg-[#111315] py-3">
+    <section className="sticky top-0 z-50 border-b border-gray-800 bg-[#0C0D10] py-3">
       <div className="container mx-auto flex items-center justify-between px-4">
         {/* Left: Hamburger Button + Logo */}
         <div className="relative flex items-center gap-3">

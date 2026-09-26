@@ -1,6 +1,7 @@
 "use client";
 import { WorkoutContext } from "@/context/WorkoutContext";
 import React, { useContext } from "react";
+import { CiBookmark } from "react-icons/ci";
 import { toast } from "react-toastify";
 
 export default function SaveForLater({ workoutDetail }) {
@@ -25,6 +26,7 @@ export default function SaveForLater({ workoutDetail }) {
       className="btn bg-black text-white border-3 rounded-xl  mr-3"
       onClick={() => handleSaveForLater()}
     >
+      <CiBookmark className="text-white" />
       Save For Later
     </button>
   );
