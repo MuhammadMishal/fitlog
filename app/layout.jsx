@@ -21,9 +21,7 @@ export default function RootLayout({ children }) {
       <body className={`min-h-screen flex flex-col ${guestFont.className}`}>
         <WorkoutProvider>
           <Navbar></Navbar>
-
           <main className="flex-1 bg-black">{children}</main>
-
           <Footer></Footer>
           <ToastContainer />
         </WorkoutProvider>

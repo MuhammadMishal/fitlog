@@ -25,7 +25,7 @@ export default function Banner() {
           </p>
 
           <Link
-            href={"/workouts"}
+            href={"#workouts"}
             className="bg-[#ccff00] hover:bg-[#b8e600] text-black font-bold px-6 py-3.5 rounded-xl transition duration-200 text-sm"
           >
             Browse Workouts

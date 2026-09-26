@@ -12,7 +12,7 @@ import { FaFire, FaRegStar } from "react-icons/fa";
 export default function AddedPlan() {
   const params = useSearchParams();
   const tab = params.get("tab");
-  const { plan, saved, setPlan, setSaved, done, setDone } =
+  const { plan, saved, setPlan, setSaved, done, setDone, isLoaded } =
     useContext(WorkoutContext);
   console.log(plan);
 
@@ -24,23 +24,26 @@ export default function AddedPlan() {
   }, [tab]);
 
   const [sortBy, setSortBy] = useState("duration");
+  const workouts = activeTab === "plan" ? plan : saved;
 
-  function removeWorkout(id) {
-    const workout = plan.find((workout) => workout.id === id);
+  const removeWorkout = (id) => {
+    const workout = workouts.find((workout) => workout.id === id);
     if (activeTab === "plan") {
+      const remainingDone = done.filter((workout) => workout.id !== id);
+      setDone(remainingDone);
       const remainingWorkout = plan.filter((workout) => workout.id !== id);
       setPlan(remainingWorkout);
       toast.success(`${workout.name} removed from today's plan`);
     } else {
       const remainingWorkout = saved.filter((workout) => workout.id !== id);
       setSaved(remainingWorkout);
+      toast.success(`${workout.name} removed from saved`);
     }
-  }
+  };
   function markAsDone(workout) {
     setDone([...done, workout]);
     toast.success(`${workout.name} marked as donee`);
   }
-  const workouts = activeTab === "plan" ? plan : saved;
 
   const totalDuration = workouts.reduce(
     (total, workout) => total + workout.duration,
@@ -133,64 +136,70 @@ export default function AddedPlan() {
       </div>
 
       <div className="space-y-4">
-        {getSortedData().map((workout) => (
-          <div
-            key={workout.id}
-            className="flex md:flex-row flex-col gap-4 md:items-center justify-between rounded-2xl border border-gray-700 bg-gray-900 p-4"
-          >
-            <div className="flex items-center gap-4 relative md:h-24 md:w-32 md:aspect-square md:min-h-min w-full min-h-52 aspect-video">
-              <Image
-                src={workout.image}
-                alt={workout.name}
-                fill
-                className="h-24 w-32 rounded-xl object-cover"
-              />
-            </div>
-            <div className="flex-1">
-              <h2 className="text-xl font-bold">{workout.name}</h2>
+        {isLoaded ? (
+          getSortedData().map((workout) => (
+            <div
+              key={workout.id}
+              className="flex md:flex-row flex-col gap-4 md:items-center justify-between rounded-2xl border border-gray-700 bg-gray-900 p-4"
+            >
+              <div className="flex items-center gap-4 relative md:h-24 md:w-32 md:aspect-square md:min-h-min w-full min-h-52 aspect-video">
+                <Image
+                  src={workout.image}
+                  alt={workout.name}
+                  fill
+                  className="h-24 w-32 rounded-xl object-cover"
+                />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-xl font-bold">{workout.name}</h2>
 
-              <p className="text-gray-400">{workout.equipment}</p>
+                <p className="text-gray-400">{workout.equipment}</p>
 
-              <div className="flex gap-4 mt-3 text-sm text-gray-400">
-                <p className="flex items-center gap-1">
-                  <IoTimeOutline className="text-[#CCFF00]" />
-                  {workout.duration} min
-                </p>
+                <div className="flex gap-4 mt-3 text-sm text-gray-400">
+                  <p className="flex items-center gap-1">
+                    <IoTimeOutline className="text-[#CCFF00]" />
+                    {workout.duration} min
+                  </p>
 
-                <p className="flex items-center gap-1">
-                  <FaFire className="text-[#CCFF00]" />
-                  {workout.caloriesBurned} kcal
-                </p>
+                  <p className="flex items-center gap-1">
+                    <FaFire className="text-[#CCFF00]" />
+                    {workout.caloriesBurned} kcal
+                  </p>
 
-                <p className="flex items-center gap-1">
-                  <FaRegStar className="text-[#CCFF00]" />
-                  {workout.rating}
-                </p>
+                  <p className="flex items-center gap-1">
+                    <FaRegStar className="text-[#CCFF00]" />
+                    {workout.rating}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link href={`/workouts/${workout.id}`}>
+                  <button className="border border-gray-600 rounded-full sm:px-4 sm:py-2 px-2 py-1 sm:text-base text-sm">
+                    View Details
+                  </button>
+                </Link>
+                <PlanActionButtons
+                  activeTab={activeTab}
+                  workoutData={workout}
+                  markAsDone={markAsDone}
+                />
+                <button
+                  onClick={() => removeWorkout(workout.id)}
+                  className="text-xl px-2"
+                >
+                  ×
+                </button>
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <Link href={`/workouts/${workout.id}`}>
-                <button className="border border-gray-600 rounded-full sm:px-4 sm:py-2 px-2 py-1 sm:text-base text-sm">
-                  View Details
-                </button>
-              </Link>
-              <PlanActionButtons
-                activeTab={activeTab}
-                workoutData={workout}
-                markAsDone={markAsDone}
-              />
-              <button
-                onClick={() => removeWorkout(workout.id)}
-                className="text-xl px-2"
-              >
-                ×
-              </button>
-            </div>
+          ))
+        ) : (
+          <div className="flex min-h-75 items-center justify-center">
+            <span className="loading loading-spinner text-success w-16 h-16 bg-[#CCFF00] "></span>
           </div>
-        ))}
+        )}
       </div>
 
-      {workouts.length === 0 && (
+      {getSortedData().length === 0 && isLoaded && (
         <div className="text-center py-10">
           <h2 className="text-xl font-bold">NOTHING HERE YET</h2>
 

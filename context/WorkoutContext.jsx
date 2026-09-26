@@ -64,6 +64,7 @@ export default function WorkoutProvider({ children }) {
     addToSaved,
     done,
     setDone,
+    isLoaded,
   };
 
   return (

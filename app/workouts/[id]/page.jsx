@@ -2,9 +2,10 @@ import React from "react";
 import Image from "next/image";
 import AddToTodaysPlan from "@/components/workoutDetails/addToPlan";
 import SaveForLater from "@/components/workoutDetails/saveForLaterButton";
+import Link from "next/link";
 
 const getWorkoutDetails = async (id) => {
-  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
+  const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`);
   const data = await res.json();
   return data;
 };
@@ -12,7 +13,18 @@ const getWorkoutDetails = async (id) => {
 export default async function WorkoutDetailsPage({ params }) {
   const { id } = await params;
   const workoutDetail = await getWorkoutDetails(id);
-  console.log("====", workoutDetail);
+  if (workoutDetail?.error) {
+    return (
+      <div className="flex flex-col items-center justify-center mt-90 ">
+        <h2 className="font-extrabold text-5xl gap-5">Data not found</h2>
+        <Link href={"/workouts"}>
+          <button className="btn text-black rounded-2xl bg-[#CCFF00] mt-5">
+            Back to Work Out{" "}
+          </button>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto flex lg:flex-row flex-col gap-4 justify-between py-10 px-4">
@@ -29,10 +41,10 @@ export default async function WorkoutDetailsPage({ params }) {
         />
       </div>
       {/* Right */}
-      <div className="flex-1">
-        <h2>{workoutDetail.name}</h2>
+      <div className="flex-1 ">
+        <h2 className="text-4xl font-bold uppercase">{workoutDetail.name}</h2>
 
-        <p>{workoutDetail.description}</p>
+        <p className="text-md text-[#9CA3AF]">{workoutDetail.description}</p>
 
         {/* muscleGroups */}
         <div className="flex gap-2 mt-4 mb-4">
@@ -50,43 +62,43 @@ export default async function WorkoutDetailsPage({ params }) {
         <div className="">
           <div className="bg-[#151922] p-4 rounded-2xl">
             <div className="flex justify-between border-b border-gray-500 p-3">
-              <p className="text-sm text-gray-400">EQUIPMENT</p>
+              <p className="text-sm text-[#9CA3AF]">EQUIPMENT</p>
               <p className="text-sm">{workoutDetail.equipment}</p>
             </div>
 
             <div className="flex justify-between border-b border-gray-500 p-3">
-              <p className="text-sm text-gray-400">DIFFICULTY</p>
+              <p className="text-sm text-[#9CA3AF]">DIFFICULTY</p>
               <p className="text-sm">{workoutDetail.difficulty}</p>
             </div>
 
             <div className="flex justify-between border-b border-gray-500  p-3">
-              <p className="text-sm text-gray-400">SETS</p>
+              <p className="text-sm text-[#9CA3AF]">SETS</p>
               <p className="text-sm">{workoutDetail.sets}</p>
             </div>
 
             <div className="flex justify-between border-b border-gray-500  p-3">
-              <p className="text-sm text-gray-400">REPS</p>
+              <p className="text-sm text-[#9CA3AF]">REPS</p>
               <p className="text-sm">{workoutDetail.reps}</p>
             </div>
 
             <div className="flex justify-between border-b border-gray-500  p-3">
-              <p className="text-sm text-gray-400">DURATION</p>
+              <p className="text-sm text-[#9CA3AF]">DURATION</p>
               <p className="text-sm">{workoutDetail.duration} min</p>
             </div>
 
             <div className="flex justify-between border-b border-gray-500  p-3">
-              <p className="text-sm text-gray-400">CALORIES</p>
+              <p className="text-sm text-[#9CA3AF]">CALORIES</p>
               <p className="text-sm">{workoutDetail.caloriesBurned} kcal</p>
             </div>
 
             <div className="flex justify-between p-3">
-              <p className="text-sm text-gray-400">RATING</p>
+              <p className="text-sm text-[#9CA3AF]">RATING</p>
               <p className="text-sm">{workoutDetail.rating}</p>
             </div>
           </div>
           {/* Instructions */}
 
-          <h2 className="font-bold p-4">Instructions</h2>
+          <h2 className="font-bold p-4 uppercase">Instructions</h2>
           <div className="p-3 ml-2">
             <ol className="list-decimal">
               {workoutDetail.instructions.map((instruction, ind) => (
