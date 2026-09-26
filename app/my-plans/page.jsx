@@ -78,26 +78,26 @@ export default function AddedPlan() {
         </p>
       </div>
 
-      <div className="mb-8 rounded-2xl border border-gray-700 bg-gray-900 p-6">
-        <div className="grid grid-cols-3 text-center">
-          <div>
+      <div className="mb-8 rounded-2xl border border-gray-700 bg-gray-900">
+        <div className="grid md:grid-cols-3 grid-cols-1 text-center md:divide-x divide-y md:divide-y-0 divide-gray-700 md:p-6 p-3">
+          <div className="md:p-5 p-4">
             <p className="text-gray-400">Exercises</p>
             <h2 className="mt-2 text-2xl font-bold">{workouts.length}</h2>
           </div>
 
-          <div className="border-x border-gray-700">
+          <div className="md:p-5 p-4">
             <p className="text-gray-400">Minutes</p>
             <h2 className="mt-2 text-2xl font-bold">{totalDuration}</h2>
           </div>
 
-          <div>
+          <div className="md:p-5 p-4">
             <p className="text-gray-400">Calories</p>
             <h2 className="mt-2 text-2xl font-bold">{totalCaloriesBurned}</h2>
           </div>
         </div>
       </div>
 
-      <div className="mb-6 flex justify-between items-center">
+      <div className="mb-6 flex sm:flex-row flex-col justify-between sm:items-center gap-4">
         <div className="flex gap-2">
           <div role="tablist" className="tabs tabs-box">
             <p
@@ -136,44 +136,41 @@ export default function AddedPlan() {
         {getSortedData().map((workout) => (
           <div
             key={workout.id}
-            className="flex items-center justify-between rounded-2xl border border-gray-700 bg-gray-900 p-4"
+            className="flex md:flex-row flex-col gap-4 md:items-center justify-between rounded-2xl border border-gray-700 bg-gray-900 p-4"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 relative md:h-24 md:w-32 md:aspect-square md:min-h-min w-full min-h-52 aspect-video">
               <Image
-                width={400}
-                height={400}
                 src={workout.image}
                 alt={workout.name}
+                fill
                 className="h-24 w-32 rounded-xl object-cover"
               />
+            </div>
+            <div className="flex-1">
+              <h2 className="text-xl font-bold">{workout.name}</h2>
 
-              <div>
-                <h2 className="text-xl font-bold">{workout.name}</h2>
+              <p className="text-gray-400">{workout.equipment}</p>
 
-                <p className="text-gray-400">{workout.equipment}</p>
+              <div className="flex gap-4 mt-3 text-sm text-gray-400">
+                <p className="flex items-center gap-1">
+                  <IoTimeOutline className="text-[#CCFF00]" />
+                  {workout.duration} min
+                </p>
 
-                <div className="flex gap-4 mt-3 text-sm text-gray-400">
-                  <p className="flex items-center gap-1">
-                    <IoTimeOutline className="text-[#CCFF00]" />
-                    {workout.duration} min
-                  </p>
+                <p className="flex items-center gap-1">
+                  <FaFire className="text-[#CCFF00]" />
+                  {workout.caloriesBurned} kcal
+                </p>
 
-                  <p className="flex items-center gap-1">
-                    <FaFire className="text-[#CCFF00]" />
-                    {workout.caloriesBurned} kcal
-                  </p>
-
-                  <p className="flex items-center gap-1">
-                    <FaRegStar className="text-[#CCFF00]" />
-                    {workout.rating}
-                  </p>
-                </div>
+                <p className="flex items-center gap-1">
+                  <FaRegStar className="text-[#CCFF00]" />
+                  {workout.rating}
+                </p>
               </div>
             </div>
-
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <Link href={`/workouts/${workout.id}`}>
-                <button className="border border-gray-600 rounded-full px-4 py-2">
+                <button className="border border-gray-600 rounded-full sm:px-4 sm:py-2 px-2 py-1 sm:text-base text-sm">
                   View Details
                 </button>
               </Link>
